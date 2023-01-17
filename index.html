@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script src="https://jspreadsheet.com/v7/jspreadsheet.js"></script>
+  <script src="https://jsuites.net/v4/jsuites.js"></script>
+  <link rel="stylesheet" href="https://jspreadsheet.com/v7/jspreadsheet.css" type="text/css" />
+  <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+  <title>JsSpredSheet</title>
+  <style>
+    #spreadsheet tbody tr:nth-child(even) {
+      background-color: #eee;
+    }
+  </style>
+  <script type="text/javascript">
+
+    function getData() {
+      fetch("https://dummyjson.com/products")
+        .then((res) => res.json())
+        .then((allData) => {
+          console.log(allData, 'data');
+          var data = []
+          allData?.products.map((item, index) => {
+            data.push({
+              id: item.id,
+              title: item.title,
+              brand: item.brand,
+              category: item.category,
+              price: item.price,
+            });
+          });
+          Spreadsheet(data)
+        });
+    }
+    function Spreadsheet(data) {
+      var spreadsheet = jspreadsheet(document.getElementById('spreadsheet'), {
+        json: data,
+        columns: [
+          {
+            type: 'text',
+            width: '80',
+            name: 'id',
+            title: 'Id'
+          },
+          {
+            type: 'text',
+            width: '350',
+            name: 'title',
+            title: 'Title'
+          },
+          {
+            type: 'text',
+            width: '250',
+            name: 'brand',
+            title: 'Brand'
+          },
+          {
+            type: 'text',
+            width: '150',
+            name: 'category',
+            title: 'Cetegory'
+          },
+          {
+            type: 'numeric',
+            width: '250',
+            name: 'price',
+            title: 'Price'
+          },
+
+        ],
+        style: {
+          A1: 'background-color: #5680E9;',
+          B1: 'background-color: #5680E9;',
+          C1: 'background-color: #5680E9;',
+          D1: 'background-color: #5680E9;',
+          E1: 'background-color: #5680E9;',
+
+          A8: 'background-color: #84CEEB;',
+          B8: 'background-color: #84CEEB;',
+          C8: 'background-color: #84CEEB;',
+          D8: 'background-color: #84CEEB;',
+          E8: 'background-color: #84CEEB;',
+
+          A15: 'background-color: #5AB9EA;',
+          B15: 'background-color: #5AB9EA;',
+          C15: 'background-color: #5AB9EA;',
+          D15: 'background-color: #5AB9EA;',
+          E15: 'background-color: #5AB9EA;',
+
+          A22: 'background-color: lightpink;',
+          B22: 'background-color: lightpink;',
+          C22: 'background-color: lightpink;',
+          D22: 'background-color: lightpink;',
+          E22: 'background-color: lightpink;',
+
+          A29: 'background-color: #8860D0;',
+          B29: 'background-color: #8860D0;',
+          C29: 'background-color: #8860D0;',
+          D29: 'background-color: #8860D0;',
+          E29: 'background-color: #8860D0;',
+        },
+
+        license: 'OWVlZWIxMjgzZWRjZTE3YzU1OWQwZTA3Mjg1NmJkZDUwYzRjYjE2NmIzNTMzYWNhOGUyMDdiMTM5MjI2MmY5NDRmMDI5ZTk2MmJhZTFmNWQ1NmUxYWM4OTkzNTQ3OWYzMjZiYTBjZGE5OGMyNTdjY2U3MmIzMjRjOTNjYWIwMzEsZXlKdVlXMWxJam9pU25Od2NtVmhaSE5vWldWMElpd2laR0YwWlNJNk1UWTNOREF4T1Rjek15d2laRzl0WVdsdUlqcGJJbXB6Y0hKbFlXUnphR1ZsZEM1amIyMGlMQ0pqYjJSbGMyRnVaR0p2ZUM1cGJ5SXNJbXB6YUdWc2JDNXVaWFFpTENKamMySXVZWEJ3SWl3aWJHOWpZV3hvYjNOMElsMHNJbkJzWVc0aU9pSXpJaXdpYzJOdmNHVWlPbHNpZGpjaUxDSjJPQ0lzSW5ZNUlpd2lZMmhoY25Seklpd2labTl5YlhNaUxDSm1iM0p0ZFd4aElpd2ljR0Z5YzJWeUlpd2ljbVZ1WkdWeUlpd2lZMjl0YldWdWRITWlMQ0pwYlhCdmNuUWlMQ0ppWVhJaUxDSjJZV3hwWkdGMGFXOXVjeUlzSW5ObFlYSmphQ0pkTENKa1pXMXZJanAwY25WbGZRPT0='
+      });
+    }
+
+    getData();
+
+
+    var data1 = [
+      {
+        title: 'Jorge',
+        id: '3'
+      },
+      {
+        title: 'Rogerio Sergio',
+        id: '4',
+      },
+      {
+        title: 'Jorgina Santos',
+        id: '5',
+      },
+      {
+        title: 'Arnaldo Antunes',
+        id: '6',
+      },
+    ];
+
+  </script>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Products Database</h1>
+    <p class="lead">Managing Products Database Using Spreadsheet</p>
+    <div class="container welcome-div">
+      <div id="spreadsheet"></div>
+    </div>
+  </div>
+
+</body>
+
+</html>
